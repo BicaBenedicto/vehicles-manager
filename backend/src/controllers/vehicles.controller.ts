@@ -21,7 +21,7 @@ export default class Vehicles {
     const id = Number(req.params.id);
     const vehicle = await this._vehiclesModel.remove(id);
     if (!vehicle) return next({ code: 404, message: 'Id not found'});
-    return res.status(204).json({ message: 'Item removed' });
+    return res.status(204).end();
   };
 
   public create = async (req: Request, res: Response): Promise<Response> => {
