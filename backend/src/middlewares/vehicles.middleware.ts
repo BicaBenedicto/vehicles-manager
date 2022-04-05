@@ -4,7 +4,7 @@ import { vehicleVerify } from '../validations';
 import connection from '../models/connection';
 
 export default class Vehicles {
-  constructor(private vehiclesModel = new VehiclesModel(connection)) {}
+  constructor(private _vehiclesModel = new VehiclesModel(connection)) {}
 
   public getAll = async (_req: Request, _res: Response, next: NextFunction): Promise<void> => {
     return next();
@@ -18,14 +18,22 @@ export default class Vehicles {
 
   public remove = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     const { id } = req.params;
-    if(!id) return next({ code: 400, message: 'Id not be empty'})
+    if(!id) return next({ code: 400, message: 'Id not be empty'});
     return next();
   };
 
   public create = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     const { body } = req;
     const verify = vehicleVerify.create(body);
-    if(verify) return next({ code: 400, message: 'Not be item empty' })
+    if(verify) return next(verify);
+    return next();
+  };
+
+  public update = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
+    const { params } = req;
+    const { id } = params;
+    if(!id) return next({ code: 400, message: 'Id not be empty'})
+
     return next();
   };
 }

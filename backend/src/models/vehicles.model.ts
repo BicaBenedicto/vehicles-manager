@@ -68,4 +68,21 @@ export default class VehiclesModel {
     const { insertId } = rows as ResultSetHeader;
     return insertId;
   }
+
+  public async update(body: IVehicles, id: number): Promise<number> {
+    const result = await this.connection.execute(`
+      UPDATE vhg_challenge.vehicles
+      SET
+        category_id = (SELECT id FROM vhg_challenge.categories_vehicles WHERE category = (?)),
+          model = (?),
+          color = (?),
+          plate = (?),
+          year = (?),
+          brand = (?)
+      WHERE id = (?);
+    `, [body.category, body.model, body.color, body.plate, body.year, body.brand, id]);
+    const [rows] = result;
+    const { affectedRows } = rows as ResultSetHeader;
+    return affectedRows;
+  }
 }
