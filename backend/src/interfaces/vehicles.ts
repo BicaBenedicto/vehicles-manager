@@ -8,7 +8,7 @@ type vehiclesCategories = {
   moto: 'Scooter' | 'Cidade' | 'Off - Road' | 'Sport';
 };
 
-export interface IVehicles<> {
+export interface IVehicles {
   type: vehiclesTypes,
   category: vehiclesCategories,
   brand: string,
