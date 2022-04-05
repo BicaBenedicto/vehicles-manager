@@ -1,6 +1,6 @@
 # Projeto Vehicles Manager
 
-Projeto desenvolvido em processo seletivo da VHG Soluções, com um front-end que realiza a comunicação ao back-end e é gerenciado por um banco de dados.
+Projeto de gerenciamento de veículos com um front-end que realiza a comunicação ao back-end e é gerenciado por um banco de dados. Podendo adicionar, remover, alterar veículos por uma interface no front-end.
 
 ## Back-End
 
