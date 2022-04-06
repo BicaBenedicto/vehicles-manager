@@ -5,6 +5,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  background: linear-gradient(white, lightgray);
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+}
+
+.loading {
+  display: block;
+  text-align: center;
+  width: 100%;
 }
 
 code {

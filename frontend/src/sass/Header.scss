@@ -1,0 +1,30 @@
+.header {
+  align-items: center;
+  background: linear-gradient(gray, rgba(255, 255, 255, 0));
+  color: black;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 150px;
+  img {
+    height: 100%;
+  }
+  nav {
+    position: absolute;
+    bottom: 0;
+    right: 20%;
+    button {
+      border: none;
+      border-bottom: 1px solid black;
+      background-color: transparent;
+      color: black;
+      font-weight: 500;
+      margin: 0 10px;
+      transition: 0.2s;
+      &:hover {
+        border-bottom: 1px solid darkgrey;
+        color: darkgrey;
+      }
+    }
+  }
+}

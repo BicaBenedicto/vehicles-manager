@@ -1,0 +1,25 @@
+section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+  .button-edit {
+    background: linear-gradient(lightgray, darkgrey);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+  .vehicle-details {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  img {
+    width: 30%;
+  }
+  p, h1, h2 {
+    margin: 0;
+  }
+  }
+}

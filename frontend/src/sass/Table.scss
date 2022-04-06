@@ -1,0 +1,23 @@
+.vehicles-table {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: auto;
+  text-align: center;
+  width: 90%;
+  button {
+    border: none;
+    background-color: transparent;
+    &:hover {
+      background-color: darkgrey;
+    }
+  }
+  .par {
+    background-color: rgb(216, 216, 216);
+  }
+  .impar {
+    background-color: whitesmoke;
+  }
+  td {
+    width: 200px;
+  }
+}
