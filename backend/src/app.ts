@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
-import { veiculosRouter } from './routes';
+import { VeiculosRouter, CategoriesRouter } from './routes';
 import errorMiddleware from './errors';
 
 const app = express();
@@ -16,7 +16,8 @@ app.use(function(_req: Request, res: Response, next: NextFunction) {
 });
 
 
-app.use('/veiculos', veiculosRouter);
+app.use('/veiculos', VeiculosRouter);
+app.use('/categorias', CategoriesRouter);
 
 app.use(errorMiddleware);
 

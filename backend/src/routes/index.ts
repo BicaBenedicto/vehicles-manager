@@ -1,3 +1,5 @@
 import veiculos from './veiculos.routes';
+import categories from './categories.routes';
 
-export const veiculosRouter = veiculos;
+export const VeiculosRouter = veiculos;
+export const CategoriesRouter = categories;
