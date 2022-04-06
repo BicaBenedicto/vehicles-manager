@@ -7,6 +7,11 @@ export const takeVehicles = async () => {
   return data;
 }
 
+export const takeCategories = async () => {
+  const { data } = await axios.get(`${BACKEND_URL}/categorias`);
+  return data;
+}
+
 export const takeVehicle = async (id) => {
   const { data } = await axios.get(`${BACKEND_URL}/veiculos/${id}`);
   return data;
@@ -14,18 +19,15 @@ export const takeVehicle = async (id) => {
 
 export const postVehicle = async (body) => {
   try {
-    console.log(body);
   await axios.post(`${BACKEND_URL}/veiculos`, body);
   return 'Cadastro bem-sucedido';
   } catch(e) {
-    console.log(e);
     return 'Cadastro não finalizado, verifique as informações preenchidas';
   }
 }
 
 export const putVehicle = async (body, id) => {
   try {
-    console.log(body);
   await axios.put(`${BACKEND_URL}/veiculos/${id}`, body);
   return 'Alterado com sucesso';
   } catch(e) {

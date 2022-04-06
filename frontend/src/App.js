@@ -11,6 +11,8 @@ function App() {
   const [vehicles, setVehicles] = useState('');
   const [isTable, setIsTable] = useState(false);
   const [isLogged, changeIsLogged] = useState(false);
+  const [types, setTypes] = useState('');
+  const [categories, setCategories] = useState('');
 
   const store = {
     vehicles,
@@ -19,6 +21,10 @@ function App() {
     setIsTable,
     isLogged,
     changeIsLogged,
+    categories,
+    setCategories,
+    types,
+    setTypes,
   };
 
   return (

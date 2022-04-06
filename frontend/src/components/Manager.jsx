@@ -1,25 +1,39 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postVehicle, putVehicle, takeVehicles, removeVehicle } from '../services/requisitionsApi';
+import { postVehicle, putVehicle, takeVehicles, removeVehicle, takeCategories } from '../services/requisitionsApi';
 import '../sass/Manager.scss';
 import Context from '../services';
 
-const TYPES = {
-  carro: ['Compacto', 'Sedan', 'SUV', 'Caminhonete'],
-  moto: ['Scooter', 'Cidade', 'Off - Road', 'Sport'],
-};
-
 export default function Manager({ vehicle = {}, isEditing = false, toggleIsEditing = () => {}}) {
-  const { setVehicles } = useContext(Context);
+  const { setVehicles, categories, types, setCategories, setTypes } = useContext(Context);
   const navigate = useNavigate();
-  const [brand, setBrand] = useState(vehicle.brand);
-  const [model, setModel] = useState(vehicle.model);
-  const [plate, setPlate] = useState(vehicle.plate);
-  const [color, setColor] = useState(vehicle.color);
-  const [year, setYear] = useState(vehicle.year);
-  const [category, setCategory] = useState(vehicle.category || TYPES[Object.keys(TYPES)[0]][0]);
-  const [type, setType] = useState(vehicle.type || Object.keys(TYPES)[0]);
+  const [brand, setBrand] = useState(vehicle.brand || '');
+  const [model, setModel] = useState(vehicle.model || '');
+  const [plate, setPlate] = useState(vehicle.plate || '');
+  const [color, setColor] = useState(vehicle.color || '');
+  const [year, setYear] = useState(vehicle.year || '');
+  const [type, setType] = useState(vehicle.type || 'carro');
+  const [category, setCategory] = useState(vehicle.category || '');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const categoriesGet = await takeCategories();
+      const typesGet = categoriesGet.map(({ type }) => type);
+      const typesRemovedDuplicate = typesGet.filter((c, index) => typesGet.indexOf(c) === index);
+      setTypes(typesRemovedDuplicate);
+
+      const TYPES = typesRemovedDuplicate.reduce((acc, obj) => ({...acc, [obj]: []}), {});
+      categoriesGet.forEach(({ category, id, type}) => (TYPES[type].push({ category, id })));
+      setCategories(TYPES);
+
+      if(!vehicle.category) {
+        setType(typesRemovedDuplicate[0]);
+        setCategory(TYPES[typesRemovedDuplicate[0]][0].category);
+      }
+    };
+    getCategories();
+  }, [setCategories, setTypes, setType, setCategory, vehicle.category]);
 
   const onRegisterButton = async (e) => {
     e.preventDefault();
@@ -68,6 +82,10 @@ export default function Manager({ vehicle = {}, isEditing = false, toggleIsEditi
     }, 10000);
   };
 
+  if(!categories || !types) {
+    return <h1 className="loading">Carregando</h1>
+  }
+
   return (
     <form className="manager" onSubmit={ onRegisterButton }>
       <label>
@@ -110,10 +128,10 @@ export default function Manager({ vehicle = {}, isEditing = false, toggleIsEditi
         />
       </label>
       <select value={ type } onChange={ (e) => setType(e.target.value)}>
-        {Object.keys(TYPES).map((type) => <option value={ type } key={ type }>{type}</option>)}
+        {types.map((type) => <option value={ type } key={ type }>{type}</option>)}
       </select>
       <select value={ category } onChange={ (e) => setCategory(e.target.value)}>
-        {TYPES[type].map((category) => <option value={ category } key={ category }>{category}</option>)}
+        {categories[type].map(({ id, category }) => <option value={ category } key={ id }>{category}</option>)}
       </select>
       {!isEditing ? (<button
         type="submit"
