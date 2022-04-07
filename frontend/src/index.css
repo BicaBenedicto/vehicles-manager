@@ -1,4 +1,5 @@
 body {
+  background: lightgray;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -13,6 +14,9 @@ body {
 #root {
   background: linear-gradient(white, lightgray);
   min-height: 100vh;
+  min-width: 300px;
+  max-width: 1800px;
+  margin: 0 auto;
   height: 100%;
   width: 100%;
 }

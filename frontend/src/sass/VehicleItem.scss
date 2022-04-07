@@ -7,14 +7,26 @@
   margin: 20px;
   padding: 0 10px;
   text-align: center;
-  width: 20%;
+  width: 100%;
   &:hover {
     background: linear-gradient(gray, darkgrey);
   }
   img {
-    width: 200px;
+    width: 80%;
   }
   p {
     align-self: flex-start;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .vehicle-item {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  .vehicle-item {
+    width: 20%;
   }
 }

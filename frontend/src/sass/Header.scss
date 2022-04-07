@@ -5,13 +5,17 @@
   display: flex;
   justify-content: center;
   position: relative;
-  height: 150px;
+  height: 10vh;
+  h1 {
+    font-size: 20px;
+    margin: 0 20px;
+  }
   img {
     height: 100%;
   }
   nav {
     position: absolute;
-    bottom: 0;
+    bottom: -30px;
     right: 20%;
     button {
       border: none;

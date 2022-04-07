@@ -4,12 +4,22 @@ main {
   flex-direction: column;
   padding: 20px;
   .show-type-button {
-    align-self: flex-end;
-    background-color: transparent;
-    border: none;
-    width: 50px;
-    img {
-      width: 100%;
-    };
+    display: none;
   }
+}
+
+@media only screen and (min-width: 600px) {
+  main {
+    .show-type-button {
+      align-self: flex-end;
+      background-color: transparent;
+      border: none;
+      display: block;
+      width: 50px;
+      img {
+        width: 100%;
+      };
+    }
+  }
+  
 }
