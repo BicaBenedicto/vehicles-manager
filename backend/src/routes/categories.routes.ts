@@ -5,7 +5,7 @@ import { CategoriesMiddleware } from '../middlewares';
 const router = express.Router();
 
 const categoriesController = new CategoriesController();
-const categoriesMiddleware = new CategoriesMiddleware();
+const categoriesMiddleware = CategoriesMiddleware;
 
 router.get('/', categoriesMiddleware.getAll, categoriesController.getAll);
 

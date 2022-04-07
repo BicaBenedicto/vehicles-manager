@@ -1,4 +1,4 @@
-import { Pool, ResultSetHeader } from "mysql2/promise";
+import { Pool } from 'mysql2/promise';
 import { ICategories } from '../interfaces/categories';
 
 export default class VehiclesModel {

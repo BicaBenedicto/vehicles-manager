@@ -1,16 +1,15 @@
-enum vehiclesTypes {
+enum VehiclesTypes {
   car = 'carro',
   motorcycle = 'moto',
 }
 
-type vehiclesCategories = {
+type VehiclesCategories = {
   carro: 'Compacto' | 'Sedan' | 'SUV' | 'Caminhonete';
   moto: 'Scooter' | 'Cidade' | 'Off - Road' | 'Sport';
 };
 
 export interface ICategories {
   id: number,
-  type: vehiclesTypes,
-  category: vehiclesCategories,
-};
-
+  type: VehiclesTypes,
+  category: VehiclesCategories,
+}

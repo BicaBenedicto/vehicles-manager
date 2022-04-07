@@ -13,14 +13,14 @@ export default class Vehicles {
   public getById = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     const id = Number(req.params.id);
     const vehicle = await this._vehiclesModel.getById(id);
-    if (!vehicle) return next({ code: 404, message: 'Id not found'});
+    if (!vehicle) return next({ code: 404, message: 'Id not found' });
     return res.status(200).json(vehicle);
   };
 
   public remove = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
     const id = Number(req.params.id);
     const vehicle = await this._vehiclesModel.remove(id);
-    if (!vehicle) return next({ code: 404, message: 'Id not found'});
+    if (!vehicle) return next({ code: 404, message: 'Id not found' });
     return res.status(204).end();
   };
 
@@ -34,9 +34,9 @@ export default class Vehicles {
     const { body } = req;
     const id = Number(req.params.id);
     const vehicle = await this._vehiclesModel.getById(id);
-    if (!vehicle) return next({ code: 404, message: 'Id not found'});
+    if (!vehicle) return next({ code: 404, message: 'Id not found' });
 
-    const vehicleUpdate = {...vehicle, ...body};
+    const vehicleUpdate = { ...vehicle, ...body };
     await this._vehiclesModel.update(vehicleUpdate, id);
     return res.status(200).json(vehicleUpdate);
   };
