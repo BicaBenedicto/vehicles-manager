@@ -128,9 +128,12 @@ Projeto de gerenciamento de veículos com um front-end que realiza a comunicaç�
 ```
 
 
-## Aprendizados
+## Aprendizados e Dificuldades
 
 Utilizar o Typescript para criação de API no Backend utilizando a tipagem e classes para criação de controller, middleware e models, com front-end com interface para gerenciamento e consulta de veículos.
+
+Maior dificuldade foi querer implementar um sistema genérico de tipagem em Typescript, para um sistema auto-suficiente com baixa manutenção de código, pensando em prioridades e tempo, isso não é algo que seria prioridade no momento, então foi deixado para a melhora futura, e usado um sistema de tipagem com informações base.
+
 
 ## Stack utilizada
 
