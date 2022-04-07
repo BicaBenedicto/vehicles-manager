@@ -17,7 +17,7 @@ export default function VehicleItem({ vehicle }) {
       <p>Tipo: {vehicle.type}</p>
       <img src={ renderImg() } alt={ vehicle.type }/>
       <h1>{vehicle.model}</h1>
-      <h2>{vehicle.brand}</h2>
+      <h2>{vehicle.category}</h2>
     </button>
   )
 }
