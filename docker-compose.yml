@@ -1,0 +1,30 @@
+version: "1.1"
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      backend:
+        condition: service_healthy
+  backend:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:4000"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    ports: 
+      - "4000:4000"
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_USER=manageruser
+      - MYSQL_PASSWORD=managerpass
+      - MYSQL_DB=vhg_challenge
+      - PORT=4000
