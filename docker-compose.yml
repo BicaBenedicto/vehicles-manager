@@ -1,6 +1,22 @@
 version: "3.3"
 
 services:
+  db:
+    image: mysql
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vhg_challenge
+      MYSQL_USER: vhguser
+      MYSQL_PASSWORD: vhgpassword
+    ports:
+      - "3434:3434"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
   backend:
     build: ./backend
     restart: always
@@ -12,13 +28,21 @@ services:
     ports: 
       - "4000:4000"
     environment:
-      - MYSQL_HOST=localhost
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=123456
-      - MYSQL_DB=vhg_challenge
-      - PORT=4000
+      MYSQL_HOST: db
+      MYSQL_USER: vhguser
+      MYSQL_PASSWORD: vhgpassword
+      MYSQL_DB: vhg_challenge
+      MYSQL_PORT: 3434
+      DATABASE_URL: mysql://vhguser:vhgpassword@db:3434/vhg_challenge
+      PORT: 4000
+    depends_on:
+      db:
+        condition: service_healthy
   frontend:
     build: ./frontend
     ports:
       - "3000:3000"
     restart: always
+    depends_on:
+      backend:
+        condition: service_healthy

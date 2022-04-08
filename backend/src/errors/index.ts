@@ -6,10 +6,10 @@ export default async function handdleGenericErrors(
   res: Response,
   _next: NextFunction,
 ): Promise<Response> {
-  if (err.code) {
+  if (typeof err.code === 'number') {
     const { code, message } = err;
     return res.status(code).json({ message });
   }
   console.log(err);
-  return res.status(500).json({ message: 'Internal error' });
+  return res.status(500).send({ message: 'Internal error' });
 }
