@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "npx prisma db push && ts-node src/index.ts",
+    "prestart": "npx prisma db push",
+    "start": "ts-node src/index.ts",
     "dev": "nodemon --exec ts-node src/index",
     "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx"
   },
