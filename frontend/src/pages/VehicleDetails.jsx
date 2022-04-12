@@ -28,9 +28,9 @@ export default function VehicleDetails() {
     return carIcon;
   };
 
-  if (!isLogged) {
-    return navigate("/");
-  }
+  useEffect(() => {
+    if (!isLogged) navigate("/");
+  }, [isLogged]);
 
   if (!vehicle) {
     return <h1 className="loading">Carregando</h1>;

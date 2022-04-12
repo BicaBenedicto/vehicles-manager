@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../sass/Login.scss";
 import Context from "../services";
@@ -14,9 +14,9 @@ export default function Login() {
     changeIsLogged(true);
   };
 
-  if (isLogged) {
-    navigate("/vehicles");
-  }
+  useEffect(() => {
+    if (isLogged) navigate("/vehicles");
+  }, [isLogged]);
 
   return (
     <form className="login" onSubmit={onLoginButton}>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "../services";
 import ManagerComponent from "../components/Manager.jsx";
@@ -8,9 +8,9 @@ export default function Manager() {
   const { isLogged } = useContext(Context);
   const navigate = useNavigate();
 
-  if (!isLogged) {
-    return navigate("/");
-  }
+  useEffect(() => {
+    if (!isLogged) navigate("/");
+  }, [isLogged]);
 
   return <ManagerComponent />;
 }

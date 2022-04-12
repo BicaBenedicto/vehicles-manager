@@ -25,9 +25,9 @@ export default function Home() {
     setIsTable(!isTable);
   };
 
-  if (!isLogged) {
-    return navigate("/");
-  }
+  useEffect(() => {
+    if (!isLogged) navigate("/");
+  }, [isLogged]);
 
   if (!vehicles) {
     return <h1 className="loading">Carregando</h1>;
