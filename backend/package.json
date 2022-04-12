@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "prestart": "npx prisma db push",
+    "prestart": "npx prisma db push && npx prisma db seed",
     "start": "ts-node src/index.ts",
     "dev": "nodemon --exec ts-node src/index",
     "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx"
@@ -12,6 +12,9 @@
   "keywords": [],
   "author": "Gabriel Benedicto",
   "license": "ISC",
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^3.12.0",
     "dotenv": "^16.0.0",
