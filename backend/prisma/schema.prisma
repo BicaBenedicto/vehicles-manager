@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model categories_vehicles {
+  id             Int            @id @default(autoincrement())
+  type_id        Int
+  category       String         @db.VarChar(100)
+  types_vehicles types_vehicles @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "categories_vehicles_ibfk_1")
+  vehicles       vehicles[]
+
+  @@index([type_id], map: "type_id")
+}
+
+model types_vehicles {
+  id                  Int                   @id @default(autoincrement())
+  type                String                @unique(map: "type") @db.VarChar(50)
+  categories_vehicles categories_vehicles[]
+}
+
+model vehicles {
+  id                  Int                 @id @default(autoincrement())
+  category_id         Int
+  brand               String              @db.VarChar(50)
+  model               String              @db.VarChar(50)
+  color               String              @db.VarChar(50)
+  plate               String              @db.VarChar(50)
+  year                Int
+  categories_vehicles categories_vehicles @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "vehicles_ibfk_1")
+
+  @@index([category_id], map: "category_id")
+}

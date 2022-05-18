@@ -1,38 +1,35 @@
 import { Response, Request, NextFunction } from 'express';
-import { VehiclesModel } from '../models';
-import { vehicleVerify } from '../validations';
-import connection from '../models/connection';
+import VehicleVerify from '../validations';
 
 export default class Vehicles {
-  constructor(private _vehiclesModel = new VehiclesModel(connection)) {}
+  public static getAll = async (_req: Request, _res: Response, next: NextFunction): Promise<void> => next();
 
-  public getAll = async (_req: Request, _res: Response, next: NextFunction): Promise<void> => {
-    return next();
-  };
-
-  public getById = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
+  public static getById = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     const { id } = req.params;
-    if(!id) return next({ code: 400, message: 'Id not be empty'})
+    if (!id) return next({ code: 400, message: 'Id not be empty' });
     return next();
   };
 
-  public remove = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
+  public static remove = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     const { id } = req.params;
-    if(!id) return next({ code: 400, message: 'Id not be empty'});
+    if (!id) return next({ code: 400, message: 'Id not be empty' });
     return next();
   };
 
-  public create = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
+  public static create = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     const { body } = req;
-    const verify = vehicleVerify.create(body);
-    if(verify) return next(verify);
+    const {
+      color, brand, model, year, category, plate,
+    } = body;
+    const verify = VehicleVerify.validateVehicle(color, brand, model, year, category, plate);
+    if (verify) return next(verify);
     return next();
   };
 
-  public update = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
+  public static update = async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     const { params } = req;
     const { id } = params;
-    if(!id) return next({ code: 400, message: 'Id not be empty'})
+    if (!id) return next({ code: 400, message: 'Id not be empty' });
 
     return next();
   };

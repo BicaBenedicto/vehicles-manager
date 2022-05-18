@@ -1,17 +1,19 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { postVehicle, putVehicle, takeVehicles, removeVehicle } from '../services/requisitionsApi';
-import Context from '../services';
-import '../sass/Table.scss';
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Context from "../services";
+import "../sass/Table.scss";
 
 export default function Table() {
   const { vehicles } = useContext(Context);
   const navigate = useNavigate();
 
-  const renderTableItems = () => {
-    return vehicles.map((vehicle, index) => (
-      <tr key={ vehicle.id } className={ index % 2 === 0 ? 'par' : 'impar' }>
-        <button onClick={ () => navigate(`/vehicles/${vehicle.id}`) }>
+  const renderTableItems = () =>
+    vehicles.map((vehicle, index) => (
+      <tr key={vehicle.id} className={index % 2 === 0 ? "par" : "impar"}>
+        <button
+          type="button"
+          onClick={() => navigate(`/vehicles/${vehicle.id}`)}
+        >
           <td>{vehicle.brand}</td>
           <td>{vehicle.model}</td>
           <td>{vehicle.plate}</td>
@@ -22,9 +24,10 @@ export default function Table() {
         </button>
       </tr>
     ));
-  };
 
-  return (!vehicles ? <h1>Carregando</h1> :
+  return !vehicles ? (
+    <h1>Carregando</h1>
+  ) : (
     <table className="vehicles-table">
       <th>
         <td>Marca</td>
@@ -38,4 +41,4 @@ export default function Table() {
       {renderTableItems()}
     </table>
   );
-};
+}

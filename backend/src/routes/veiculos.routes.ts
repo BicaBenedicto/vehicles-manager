@@ -3,7 +3,7 @@ import { VehiclesController } from '../controllers';
 import { VehiclesMiddleware } from '../middlewares';
 
 const router = express.Router();
-const vehiclesMiddleware = new VehiclesMiddleware();
+const vehiclesMiddleware = VehiclesMiddleware;
 const vehiclesController = new VehiclesController();
 
 router.get('/:id', vehiclesMiddleware.getById, vehiclesController.getById);
